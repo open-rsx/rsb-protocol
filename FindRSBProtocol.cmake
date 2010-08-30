@@ -21,7 +21,7 @@
 INCLUDE(FindPackageHandleStandardArgs)
 
 FIND_FILE(RSBPROTO_ROOT
-          NAMES Notification.proo
+          NAMES Notification.proto
           PATH_SUFFIX "rsbprotocol"
           PATHS "${CMAKE_INSTALL_PREFIX}/share/")
          
