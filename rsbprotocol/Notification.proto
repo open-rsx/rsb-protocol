@@ -2,14 +2,20 @@ package rsb.protocol;
 
 import "Attachment.proto";
 
+message MetaInfo {
+    required string key = 0;
+    required string value = 1;
+}
+
 message Notification {
     optional string version = 1 [default = "1.0"];
     required string eid = 2;    
     required bool standalone = 3;
-    optional int32 sid = 4;
-    optional int32 s_length = 5;
+    optional int32 sequence_id = 4;
+    optional int32 sequence_length = 5;
     optional string uri = 6;
     optional string type_id = 7;
     optional string comment = 8;
     optional Attachment data = 9;
+    repeated MetaInfo metaInfos = 10;
 }
