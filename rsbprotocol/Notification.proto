@@ -3,8 +3,8 @@ package rsb.protocol;
 import "Attachment.proto";
 
 message MetaInfo {
-    required string key = 0;
-    required string value = 1;
+    required string key = 1;
+    required string value = 2;
 }
 
 message Notification {
