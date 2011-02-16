@@ -1,5 +1,7 @@
 package rsb.protocol.introspection;
 
+option java_outer_classname = "PortStateChangePB";
+
 message PortStateChange {
     optional string version = 1 [default = "1.0"];
     required string type = 2;

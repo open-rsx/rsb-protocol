@@ -2,6 +2,8 @@ package rsb.protocol;
 
 import "Attachment.proto";
 
+option java_outer_classname = "NotificationPB";
+
 message MetaInfo {
     required string key = 1;
     required string value = 2;
