@@ -20,6 +20,6 @@ message Notification {
     optional string comment = 8;
     optional Attachment data = 9;
     repeated MetaInfo metaInfos = 10;
-    required int32 num_data_parts = 11;
+    optional int32 num_data_parts = 11;
     optional int32 data_part = 12;
 }
