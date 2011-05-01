@@ -11,15 +11,11 @@ message MetaInfo {
 
 message Notification {
     optional string version = 1 [default = "1.0"];
-    required string eid = 2;    
-    required bool standalone = 3;
-    optional uint32 sequence_id = 4;
-    optional uint32 sequence_length = 5;
-    optional string uri = 6;
-    optional string type_id = 7;
-    optional string comment = 8;
+    required string id = 2;    
+    optional string scope = 6;
+    optional string wire_schema = 7;
     optional Attachment data = 9;
-    repeated MetaInfo metaInfos = 10;
+    repeated MetaInfo meta_infos = 10;
     optional uint32 num_data_parts = 11;
     optional uint32 data_part = 12;
 }
