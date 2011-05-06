@@ -28,5 +28,7 @@ message Notification {
     optional uint32 num_data_parts = 11 [default = 1];
     // The index of the current part of a split message. Counting starts with 0
     optional uint32 data_part = 12 [default = 0];
+    // a method type that is associated with this notification
+    optional string method = 14 [default = ""];
     
 }
