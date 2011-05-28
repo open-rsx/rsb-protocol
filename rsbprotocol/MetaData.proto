@@ -28,12 +28,12 @@ message MetaData {
 
     // The time at which an event is received by listener in its
     // encoded form.
-    required int64      receive_time            = 4;
+    optional int64      receive_time            = 4;
 
     // The time at which an event was decoded and will be dispatched
     // to the client as soon as possible (set directly before passing
     // it to the client handler).
-    required int64      deliver_time            = 5;
+    optional int64      deliver_time            = 5;
 
     // A set of key-value user-defined time-stamps.
     repeated UserTime   user_times              = 6;
