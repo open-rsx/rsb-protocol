@@ -12,7 +12,8 @@ message UserTime {
 }
 
 message MetaData {
-    // ID (a UUID) of the sending participant.
+    // ID (a UUID) of the sending participant as byte array. For this
+    // encoding, the encoded UUID is 16 bytes long.
     required bytes      sender_id               = 1;
 
     // A time stamp that is automatically filled with the time the
