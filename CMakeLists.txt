@@ -13,10 +13,8 @@ MACRO(INSTALL_FILES_WITH_DIRECTORY FILE_LIST)
 
 ENDMACRO()
 
-SET(PROTOFILES rsbprotocol/Attachment.proto
-               rsbprotocol/Notification.proto
-	       rsbprotocol/MetaData.proto
-               rsbprotocol/introspection/PortStateChange.proto)
+SET(PROTOFILES RSBProtocol/Protocol.proto
+               RSBProtocol/introspection/PortStateChange.proto)
 
 INSTALL_FILES_WITH_DIRECTORY(PROTOFILES)
 
