@@ -45,7 +45,7 @@ message MetaData {
 
     // A set of key-value user-defined time-stamps.
     repeated UserTime   user_times              = 6;
-    
+
     // A set of key-value user-defined options with string keys and values
     repeated UserInfo   user_infos              = 7;
 }
@@ -53,8 +53,10 @@ message MetaData {
 message Notification {
 
     optional bytes version = 1 [default = "1.0"];
-    // The id of the rsb event that is encoded in this notification
-    required bytes id = 2;
+
+    // The sequence number of the encoded event. This sequence number
+    // is unique "within" the participant that sent the event.
+    required uint32 sequence_number = 2;
     // The scope under which the encoded event was sent
     optional bytes scope = 6;
     // The encoding format of the user data contained in the event
