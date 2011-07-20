@@ -19,10 +19,6 @@ message UserInfo {
 }
 
 message MetaData {
-    // ID (a UUID) of the sending participant as byte array. For this
-    // encoding, the encoded UUID is 16 bytes long.
-    required bytes      sender_id               = 1;
-
     // A time stamp that is automatically filled with the time the
     // event instance was created by the language binding. This should
     // usually reflect the time at which the notified condition most
@@ -52,11 +48,22 @@ message MetaData {
 
 message Notification {
 
-    optional bytes version = 1 [default = "1.0"];
+    optional bytes      version                 = 1 [default = "1.0"];
 
     // The sequence number of the encoded event. This sequence number
     // is unique "within" the participant that sent the event.
-    required uint32 sequence_number = 2;
+    //
+    // When combined with sender_id, uniquely identifies the encoded
+    // event.
+    required uint32     sequence_number         = 2;
+
+    // ID (a UUID) of the sending participant as byte array. For this
+    // encoding, the encoded UUID is 16 bytes long.
+    //
+    // When combined with sequence_number, uniquely identifies the
+    // encoded event.
+    required bytes      sender_id               = 3;
+
     // The scope under which the encoded event was sent
     optional bytes scope = 6;
     // The encoding format of the user data contained in the event
