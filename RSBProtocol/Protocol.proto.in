@@ -82,7 +82,11 @@ message Notification {
     //
     // When combined with sender_id, uniquely identifies the encoded
     // event.
-    required uint32     sequence_number         = 100;
+    //
+    // The field number of this required field is generated based on
+    // the current wire format version number to ensure runtime errors
+    // for incompatible wire format versions.
+    required uint32     sequence_number         = @WIRE_FORMAT_VERSION_FIELD_NUMBER@;
 
     // ID (a UUID) of the sending participant as byte array. For this
     // encoding, the encoded UUID is 16 bytes long.

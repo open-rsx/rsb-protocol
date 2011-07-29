@@ -20,6 +20,12 @@ MACRO(INSTALL_FILES_WITH_DIRECTORY FILE_LIST)
 
 ENDMACRO()
 
+MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
+     "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
+CONFIGURE_FILE(RSBProtocol/Protocol.proto.in
+               "${CMAKE_CURRENT_SOURCE_DIR}/RSBProtocol/Protocol.proto"
+	       @ONLY)
+
 SET(PROTOFILES RSBProtocol/Protocol.proto
                RSBProtocol/introspection/PortStateChange.proto)
 
