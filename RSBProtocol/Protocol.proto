@@ -75,9 +75,6 @@ message MetaData {
 // https://code.cor-lab.org/projects/rsb/wiki/SpreadProtocol for some
 // aspects of the event <-> notification transformation.
 message Notification {
-
-    optional bytes      version                 = 1 [default = "1.0"];
-
     // Identity, transportation and routing information fields
 
     // The sequence number of the encoded event. This sequence number
@@ -85,7 +82,7 @@ message Notification {
     //
     // When combined with sender_id, uniquely identifies the encoded
     // event.
-    required uint32     sequence_number         = 2;
+    required uint32     sequence_number         = 100;
 
     // ID (a UUID) of the sending participant as byte array. For this
     // encoding, the encoded UUID is 16 bytes long.
