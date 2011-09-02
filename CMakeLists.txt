@@ -11,35 +11,26 @@ SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "5")
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
-MACRO(INSTALL_FILES_WITH_DIRECTORY FILE_LIST)
-
-    FOREACH(HEADER ${${FILE_LIST}})
-        STRING(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
-        INSTALL(FILES ${HEADER} DESTINATION share/${DIR})
-    ENDFOREACH(HEADER)
-
-ENDMACRO()
-
 MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
      "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
-CONFIGURE_FILE(RSBProtocol/Protocol.proto.in
-               "${CMAKE_CURRENT_SOURCE_DIR}/RSBProtocol/Protocol.proto"
-	       @ONLY)
+CONFIGURE_FILE(rsbprotocol/Protocol.proto.in
+               "${CMAKE_CURRENT_BINARY_DIR}/rsbprotocol/Protocol.proto"
+               @ONLY)
 
-SET(PROTOFILES RSBProtocol/Protocol.proto
-               RSBProtocol/introspection/PortStateChange.proto)
+INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsbprotocol/Protocol.proto" DESTINATION share/rsbprotocol)
+INSTALL(FILES "rsbprotocol/introspection/PortStateChange.proto" DESTINATION share/rsbprotocol/introspection)
 
-INSTALL_FILES_WITH_DIRECTORY(PROTOFILES)
-
+SET(PROTOFILES rsbprotocol/Protocol.proto
+               rsbprotocol/introspection/PortStateChange.proto)
 CONFIGURE_FILE(RSBProtocolConfig.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
-	       @ONLY)
+               @ONLY)
 CONFIGURE_FILE(RSBProtocolConfig-version.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
-	       @ONLY)
+               @ONLY)
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
-        DESTINATION share/RSBProtocol)
+        DESTINATION share/rsbprotocol)
 
 # Package
 SET(CPACK_PACKAGE_VENDOR "CoR-Lab Bielefeld University")
