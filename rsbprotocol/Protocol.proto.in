@@ -37,6 +37,7 @@ message UserInfo {
     required bytes      value                   = 2;
 }
 
+// A collection of supplemental meta data for an event.
 message MetaData {
     // A time stamp that is automatically filled with the time the
     // event instance was created by the language binding. This should
