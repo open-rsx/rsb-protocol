@@ -30,9 +30,7 @@ option java_outer_classname = "NotificationType";
 // event meta-data such as timestamps.
 //
 // See https://code.cor-lab.org/projects/rsb/wiki/Events for more
-// information regarding events and
-// https://code.cor-lab.org/projects/rsb/wiki/SpreadProtocol for some
-// aspects of the event <-> notification transformation.
+// information regarding events.
 message Notification {
     // Identity, transportation and routing information fields
 
