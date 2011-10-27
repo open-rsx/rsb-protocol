@@ -7,21 +7,26 @@ SET(RSB_PROTOCOL_VERSION_MAJOR "0")
 SET(RSB_PROTOCOL_VERSION_MINOR "6")
 SET(RSB_PROTOCOL_VERSION_PATCH "0")
 SET(RSB_PROTOCOL_VERSION "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MINOR}.${RSB_PROTOCOL_VERSION_PATCH}")
-SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "6")
+SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "7")
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
 MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
      "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
-CONFIGURE_FILE(rsbprotocol/Protocol.proto.in
-               "${CMAKE_CURRENT_BINARY_DIR}/rsbprotocol/Protocol.proto"
+CONFIGURE_FILE(rsb/protocol/Notification.proto.in
+               "${CMAKE_CURRENT_BINARY_DIR}/rsb/protocol/Notification.proto"
                @ONLY)
 
-INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsbprotocol/Protocol.proto" DESTINATION share/rsbprotocol)
-INSTALL(FILES "rsbprotocol/introspection/PortStateChange.proto" DESTINATION share/rsbprotocol/introspection)
+INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsb/protocol/Notification.proto"
+              rsb/protocol/EventId.proto
+              rsb/protocol/EventMetaData.proto
+              rsb/protocol/FragmentedNotification.proto
+        DESTINATION share/rsbprotocol/rsb/protocol/)
 
-SET(PROTOFILES rsbprotocol/Protocol.proto
-               rsbprotocol/introspection/PortStateChange.proto)
+SET(PROTOFILES rsb/protocol/Notification.proto
+               rsb/protocol/EventId.proto
+               rsb/protocol/EventMetaData.proto
+               rsb/protocol/FragmentedNotification.proto)
 CONFIGURE_FILE(RSBProtocolConfig.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
                @ONLY)
