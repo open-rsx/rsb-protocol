@@ -7,7 +7,7 @@ SET(RSB_PROTOCOL_VERSION_MAJOR "0")
 SET(RSB_PROTOCOL_VERSION_MINOR "6")
 SET(RSB_PROTOCOL_VERSION_PATCH "0")
 SET(RSB_PROTOCOL_VERSION "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MINOR}.${RSB_PROTOCOL_VERSION_PATCH}")
-SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "7")
+SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
@@ -22,11 +22,14 @@ INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsb/protocol/Notification.proto"
               rsb/protocol/EventMetaData.proto
               rsb/protocol/FragmentedNotification.proto
         DESTINATION share/rsbprotocol/rsb/protocol/)
+INSTALL(FILES rsb/protocol/collections/EventsByScopeMap.proto
+        DESTINATION share/rsbprotocol/rsb/protocol/collections)
 
 SET(PROTOFILES rsb/protocol/Notification.proto
                rsb/protocol/EventId.proto
                rsb/protocol/EventMetaData.proto
-               rsb/protocol/FragmentedNotification.proto)
+               rsb/protocol/FragmentedNotification.proto
+               rsb/protocol/collections/EventsByScopeMap.proto)
 CONFIGURE_FILE(RSBProtocolConfig.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
                @ONLY)
