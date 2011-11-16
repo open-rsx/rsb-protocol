@@ -1,5 +1,7 @@
 package rsb.protocol.collections;
 
+option java_outer_classname = "EventsByScopeMapType";
+
 import "rsb/protocol/Notification.proto";
 
 message EventsByScopeMap {
