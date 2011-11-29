@@ -19,9 +19,12 @@ CONFIGURE_FILE(rsbprotocol/Protocol.proto.in
 
 INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsbprotocol/Protocol.proto" DESTINATION share/rsbprotocol)
 INSTALL(FILES "rsbprotocol/introspection/PortStateChange.proto" DESTINATION share/rsbprotocol/introspection)
+INSTALL(FILES rsbprotocol/collections/EventsByScopeMap.proto
+        DESTINATION share/rsbprotocol/collections)
 
 SET(PROTOFILES rsbprotocol/Protocol.proto
-               rsbprotocol/introspection/PortStateChange.proto)
+               rsbprotocol/introspection/PortStateChange.proto
+			   rsbprotocol/collections/EventsByScopeMap.proto)
 CONFIGURE_FILE(RSBProtocolConfig.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
                @ONLY)

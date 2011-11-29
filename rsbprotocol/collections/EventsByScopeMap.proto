@@ -1,0 +1,16 @@
+package rsb.protocol.collections;
+
+option java_outer_classname = "EventsByScopeMapType";
+
+import "Protocol.proto";
+
+message EventsByScopeMap {
+
+	message ScopeSet {
+		required bytes scope = 1;
+		repeated .rsb.protocol.Notification notifications = 2;
+	}
+	
+	repeated ScopeSet sets = 1;
+
+}
