@@ -11,25 +11,43 @@ SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
+FIND_PACKAGE(RSC "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MINOR}" REQUIRED)
+MESSAGE(${RSC_CMAKE_MODULE_PATH})
+LIST(APPEND CMAKE_MODULE_PATH ${RSC_CMAKE_MODULE_PATH})
+INCLUDE(InstallFilesRecursive)
+
 MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
      "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
-CONFIGURE_FILE(rsb/protocol/Notification.proto.in
-               "${CMAKE_CURRENT_BINARY_DIR}/rsb/protocol/Notification.proto"
+     
+# configre all files so that they are all in the build tree. This makes handling
+# protocol buffers easier because there is only one single root
+
+SET(ALL_SOURCE_PROTOS "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/Notification.proto"
+                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/EventId.proto"
+                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/EventMetaData.proto"
+                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/FragmentedNotification.proto"
+                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/collections/EventsByScopeMap.proto")
+
+SET(ALL_BINARY_PROTOS)
+SET(ALL_REL_PROTOS)
+FOREACH(PROTO ${ALL_SOURCE_PROTOS})
+
+    FILE(RELATIVE_PATH REL_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${PROTO})
+    SET(BIN_PATH "${CMAKE_CURRENT_BINARY_DIR}/${REL_PATH}")
+    LIST(APPEND ALL_REL_PROTOS ${REL_PATH})
+    LIST(APPEND ALL_BINARY_PROTOS ${BIN_PATH})
+
+    CONFIGURE_FILE(${PROTO} ${BIN_PATH} @ONLY)
+               
+ENDFOREACH()
+
+INSTALL_FILES_RECURSIVE(share/rsbprotocol ALL_BINARY_PROTOS)
+
+EXPORT(PACKAGE RSBProtocol)
+
+CONFIGURE_FILE(RSBProtocolBuildTreeSettings.cmake.in
+               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolBuildTreeSettings.cmake
                @ONLY)
-
-INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/rsb/protocol/Notification.proto"
-              rsb/protocol/EventId.proto
-              rsb/protocol/EventMetaData.proto
-              rsb/protocol/FragmentedNotification.proto
-        DESTINATION share/rsbprotocol/rsb/protocol/)
-INSTALL(FILES rsb/protocol/collections/EventsByScopeMap.proto
-        DESTINATION share/rsbprotocol/rsb/protocol/collections)
-
-SET(PROTOFILES rsb/protocol/Notification.proto
-               rsb/protocol/EventId.proto
-               rsb/protocol/EventMetaData.proto
-               rsb/protocol/FragmentedNotification.proto
-               rsb/protocol/collections/EventsByScopeMap.proto)
 CONFIGURE_FILE(RSBProtocolConfig.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
                @ONLY)
