@@ -3,6 +3,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 # Name and version
 PROJECT("RSBProtocol")
 
+OPTION(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, RSBProtocol will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
+
 SET(RSB_PROTOCOL_VERSION_MAJOR "0")
 SET(RSB_PROTOCOL_VERSION_MINOR "6")
 SET(RSB_PROTOCOL_VERSION_PATCH "0")
@@ -42,7 +44,10 @@ ENDFOREACH()
 
 INSTALL_FILES_RECURSIVE(share/rsbprotocol ALL_BINARY_PROTOS)
 
-EXPORT(PACKAGE RSBProtocol)
+IF(EXPORT_TO_CMAKE_PACKAGE_REGISTRY)
+    MESSAGE(STATUS "Exported RSBProtocol to CMake package registry")
+    EXPORT(PACKAGE RSBProtocol)
+ENDIF()
 
 CONFIGURE_FILE(RSBProtocolBuildTreeSettings.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolBuildTreeSettings.cmake
