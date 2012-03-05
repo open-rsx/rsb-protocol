@@ -6,7 +6,7 @@ PROJECT("RSBProtocol")
 OPTION(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, RSBProtocol will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
 
 SET(RSB_PROTOCOL_VERSION_MAJOR "0")
-SET(RSB_PROTOCOL_VERSION_MINOR "6")
+SET(RSB_PROTOCOL_VERSION_MINOR "7")
 SET(RSB_PROTOCOL_VERSION_PATCH "0")
 SET(RSB_PROTOCOL_VERSION "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MINOR}.${RSB_PROTOCOL_VERSION_PATCH}")
 SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
@@ -19,7 +19,7 @@ INCLUDE(InstallFilesRecursive)
 
 MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
      "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
-     
+
 # configre all files so that they are all in the build tree. This makes handling
 # protocol buffers easier because there is only one single root
 
@@ -39,7 +39,7 @@ FOREACH(PROTO ${ALL_SOURCE_PROTOS})
     LIST(APPEND ALL_BINARY_PROTOS ${BIN_PATH})
 
     CONFIGURE_FILE(${PROTO} ${BIN_PATH} @ONLY)
-               
+
 ENDFOREACH()
 
 INSTALL_FILES_RECURSIVE(share/rsbprotocol ALL_BINARY_PROTOS)
