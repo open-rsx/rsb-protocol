@@ -61,6 +61,8 @@ CONFIGURE_FILE(RSBProtocolConfig-version.cmake.in
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
         DESTINATION share/rsbprotocol)
+        
+INSTALL(FILES COPYING.txt DESTINATION share/doc/rsbprotocol RENAME copyright)
 
 # Package
 SET(CPACK_GENERATOR "STGZ;TGZ;TZ")
