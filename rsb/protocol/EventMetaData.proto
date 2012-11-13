@@ -28,13 +28,15 @@ package rsb.protocol;
 
 option java_outer_classname = "EventMetaDataType";
 
-// Additional user-provided timing information.
+// Additional user-provided timestamps.
 message UserTime {
-    // The key is a string consisting of ASCII characters that
-    // determines the meaning of the timestamp.
+    // The key is an ASCII-string that determines the meaning of the
+    // timestamp. It can be chosen freely.
     required bytes      key                     = 1;
 
-    // A timestamp in microseconds.
+    // A timestamp in UTC in microseconds since UNIX epoch.
+    //
+    // http://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html#timestamps
     required uint64     timestamp               = 2;
 }
 
@@ -45,12 +47,17 @@ message UserInfo {
 }
 
 // A collection of supplemental meta data for an event.
+//
+// For details on timestamps see
+// http://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html#timestamps
 message EventMetaData {
-    // A time stamp that is automatically filled with the time the
-    // event instance was created by the language binding. This should
-    // usually reflect the time at which the notified condition most
-    // likely occurred in the sender. If event instances are reused,
-    // it has to be reset manually by the client.
+    // A timestamp that is automatically filled with the time the
+    // event instance was created. This should usually reflect the
+    // time at which the notified condition most likely occurred in
+    // the sending process.
+
+    // If event instances are reused, this timestamp has to be reset
+    // manually by the client.
     required int64      create_time             = 2;
 
     // The time at which the generated notification for an event was
@@ -69,6 +76,7 @@ message EventMetaData {
     // A set of key-value user-defined time-stamps.
     repeated UserTime   user_times              = 6;
 
-    // A set of key-value user-defined options with string keys and values
+    // A set of key-value user-defined options with string keys and
+    // values.
     repeated UserInfo   user_infos              = 7;
 }
