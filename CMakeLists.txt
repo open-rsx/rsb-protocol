@@ -5,11 +5,12 @@ PROJECT("RSBProtocol")
 
 OPTION(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, RSBProtocol will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
 
+SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
+
 SET(RSB_PROTOCOL_VERSION_MAJOR "0")
 SET(RSB_PROTOCOL_VERSION_MINOR "9")
-SET(RSB_PROTOCOL_VERSION_PATCH "0")
+SET(RSB_PROTOCOL_VERSION_PATCH "${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
 SET(RSB_PROTOCOL_VERSION "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MINOR}.${RSB_PROTOCOL_VERSION_PATCH}")
-SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
@@ -61,7 +62,7 @@ CONFIGURE_FILE(RSBProtocolConfig-version.cmake.in
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
         DESTINATION share/rsbprotocol)
-        
+
 INSTALL(FILES COPYING.txt DESTINATION share/doc/rsbprotocol RENAME copyright)
 
 # Package
