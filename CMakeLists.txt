@@ -2,8 +2,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 # Name and version
 PROJECT("RSBProtocol")
+STRING(TOLOWER "${CMAKE_PROJECT_NAME}" PROJECT_NAME_LOWERCASE)
 
-OPTION(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, RSBProtocol will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
+OPTION(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, ${CMAKE_PROJECT_NAME} will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
 
 SET(RSB_PROTOCOL_WIRE_FORMAT_VERSION "8")
 
@@ -43,27 +44,30 @@ FOREACH(PROTO ${ALL_SOURCE_PROTOS})
 
 ENDFOREACH()
 
-INSTALL_FILES_RECURSIVE(share/rsbprotocol ALL_BINARY_PROTOS)
+INSTALL_FILES_RECURSIVE("share/${PROJECT_NAME_LOWERCASE}"
+                        ALL_BINARY_PROTOS)
 
 IF(EXPORT_TO_CMAKE_PACKAGE_REGISTRY)
-    MESSAGE(STATUS "Exported RSBProtocol to CMake package registry")
+    MESSAGE(STATUS "Exported ${CMAKE_PROJECT_NAME} to CMake package registry")
     EXPORT(PACKAGE RSBProtocol)
 ENDIF()
 
-CONFIGURE_FILE(RSBProtocolBuildTreeSettings.cmake.in
-               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolBuildTreeSettings.cmake
+CONFIGURE_FILE("${CMAKE_PROJECT_NAME}BuildTreeSettings.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}BuildTreeSettings.cmake"
                @ONLY)
-CONFIGURE_FILE(RSBProtocolConfig.cmake.in
-               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
+CONFIGURE_FILE("${CMAKE_PROJECT_NAME}Config.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
                @ONLY)
-CONFIGURE_FILE(RSBProtocolConfig-version.cmake.in
-               ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
+CONFIGURE_FILE("${CMAKE_PROJECT_NAME}Config-version.cmake.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config-version.cmake"
                @ONLY)
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/RSBProtocolConfig-version.cmake
-        DESTINATION share/rsbprotocol)
+INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
+              "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config-version.cmake"
+        DESTINATION "share/${PROJECT_NAME_LOWERCASE}")
 
-INSTALL(FILES COPYING.txt DESTINATION share/doc/rsbprotocol RENAME copyright)
+INSTALL(FILES COPYING.txt
+        DESTINATION "share/doc/${PROJECT_NAME_LOWERCASE}"
+        RENAME copyright)
 
 # Package
 SET(CPACK_PACKAGE_VERSION_MAJOR ${RSB_PROTOCOL_VERSION_MAJOR})
