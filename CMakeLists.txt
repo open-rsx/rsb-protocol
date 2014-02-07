@@ -31,7 +31,15 @@ SET(ALL_SOURCE_PROTOS "${PROTO_DIR}/rsb/protocol/Notification.proto"
                       "${PROTO_DIR}/rsb/protocol/EventId.proto"
                       "${PROTO_DIR}/rsb/protocol/EventMetaData.proto"
                       "${PROTO_DIR}/rsb/protocol/FragmentedNotification.proto"
-                      "${PROTO_DIR}/rsb/protocol/collections/EventsByScopeMap.proto")
+
+                      "${PROTO_DIR}/rsb/protocol/collections/EventsByScopeMap.proto"
+
+                      "${PROTO_DIR}/rsb/protocol/operatingsystem/__package.proto"
+                      "${PROTO_DIR}/rsb/protocol/operatingsystem/Process.proto"
+
+                      "${PROTO_DIR}/rsb/protocol/introspection/__package.proto"
+                      "${PROTO_DIR}/rsb/protocol/introspection/Hello.proto"
+                      "${PROTO_DIR}/rsb/protocol/introspection/Bye.proto")
 
 SET(ALL_BINARY_PROTOS)
 SET(ALL_REL_PROTOS)
