@@ -26,17 +26,18 @@ MATH(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
 # configre all files so that they are all in the build tree. This makes handling
 # protocol buffers easier because there is only one single root
 
-SET(ALL_SOURCE_PROTOS "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/Notification.proto"
-                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/EventId.proto"
-                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/EventMetaData.proto"
-                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/FragmentedNotification.proto"
-                      "${CMAKE_CURRENT_SOURCE_DIR}/rsb/protocol/collections/EventsByScopeMap.proto")
+SET(PROTO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/proto/")
+SET(ALL_SOURCE_PROTOS "${PROTO_DIR}/rsb/protocol/Notification.proto"
+                      "${PROTO_DIR}/rsb/protocol/EventId.proto"
+                      "${PROTO_DIR}/rsb/protocol/EventMetaData.proto"
+                      "${PROTO_DIR}/rsb/protocol/FragmentedNotification.proto"
+                      "${PROTO_DIR}/rsb/protocol/collections/EventsByScopeMap.proto")
 
 SET(ALL_BINARY_PROTOS)
 SET(ALL_REL_PROTOS)
 FOREACH(PROTO ${ALL_SOURCE_PROTOS})
 
-    FILE(RELATIVE_PATH REL_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${PROTO})
+    FILE(RELATIVE_PATH REL_PATH ${PROTO_DIR} ${PROTO})
     SET(BIN_PATH "${CMAKE_CURRENT_BINARY_DIR}/${REL_PATH}")
     LIST(APPEND ALL_REL_PROTOS ${REL_PATH})
     LIST(APPEND ALL_BINARY_PROTOS ${BIN_PATH})
