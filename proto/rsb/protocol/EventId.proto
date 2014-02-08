@@ -28,13 +28,24 @@ package rsb.protocol;
 
 option java_outer_classname = "EventIdType";
 
-// Tuple of sender id and sequence number which makes one event uniquely
-// identifiable.
+/**
+ * Tuple of sender id and sequence number which makes one event uniquely
+ * identifiable.
+ *
+ * @author Johannes Wienke <jwienke@techfak.uni-bielefeld.de>
+ */
 message EventId {
-    // ID (a UUID) of the sending participant as byte array. For this
-    // encoding, the encoded UUID is 16 bytes long.
+
+    /**
+     * ID (a UUID) of the sending participant as byte array. For this
+     * encoding, the encoded UUID is 16 bytes long.
+     */
     required bytes sender_id = 1;
-    // The sequence number of the encoded event. This sequence number
-    // is unique "within" the participant that sent the event. 
-    required uint32 sequence_number = 2; 
+
+    /**
+     * The sequence number of the encoded event. This sequence number
+     * is unique "within" the participant that sent the event.
+     */
+    required uint32 sequence_number = 2;
+
 }

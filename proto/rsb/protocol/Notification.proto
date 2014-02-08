@@ -31,46 +31,69 @@ import "rsb/protocol/EventMetaData.proto";
 
 option java_outer_classname = "NotificationType";
 
-// The Notification message is the wire format and serialization
-// mechanism used by the RSB Spread transport and other transports.
-//
-// Notification messages contain
-//
-// * event routing information,
-// * event payloads
-// * and optional event meta-data such as timestamps
-//
-// See
-// https://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html
-// for more information regarding events.
+/**
+ * The Notification message is the wire format and serialization
+ * mechanism used by the RSB Spread transport and other transports.
+ *
+ * Notification messages contain
+ *
+ * * event routing information,
+ * * event payloads
+ * * and optional event meta-data such as timestamps
+ *
+ * See
+ * https://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html
+ * for more information regarding events.
+ *
+ * @author Sebastian Wrede <swrede@techfak.uni-bielefeld.de>
+ * @author Johannes Wienke <jwienke@techfak.uni-bielefeld.de>
+ * @author Jan Moringen <jmoringe@techfak.uni-bielefeld.de>
+ */
 message Notification {
-    /// Identity, transportation and routing information fields
 
-    // The unique ID of the event, consisting of the unique id of
-    // sending participant and the sequence number of the event..
-    //
-    // The field number of this required field is generated based on
-    // the current wire format version number to ensure runtime errors
-    // for incompatible wire format versions.
+    // Identity, transportation and routing information fields
+
+    /**
+     * The unique ID of the event, consisting of the unique id of
+     * sending participant and the sequence number of the event.
+     *
+     * The field number of this required field is generated based on
+     * the current wire format version number to ensure runtime errors
+     * for incompatible wire format versions.
+     */
     required EventId     event_id               = @WIRE_FORMAT_VERSION_FIELD_NUMBER@;
 
-    // The scope to which the encoded event was sent.
+    /**
+     * The scope to which the encoded event was sent.
+     */
     optional bytes      scope                   = 6;
 
-    // An ASCII-string designating the role of this event within a
-    // communication pattern. Two such roles could be "REQUEST" and
-    // "REPLY" in RPC communication.
+    /**
+     * An ASCII-string designating the role of this event within a
+     * communication pattern.
+     *
+     * Two such roles could be "REQUEST" and "REPLY" in RPC
+     * communication.
+     *
+     * Note: The bytes type has been chosen to avoid UTF-8 de- and
+     * encoding.
+     */
     optional bytes      method                  = 14 [default = ""];
 
-    /// Data fields
+    // Data fields
 
-    // An ASCII-string designating the wire schema with which the
-    // event payload (in the "data" field) has been serialized.
-    //
-    // The bytes type has been chosen to avoid UTF-8 de- and encoding.
+    /**
+     * An ASCII-string designating the wire schema with which the
+     * event payload (in the "data" field) has been serialized.
+     *
+     * Note: The bytes type has been chosen to avoid UTF-8 de- and
+     * encoding.
+     */
     optional bytes      wire_schema             = 7;
 
-    // The serialized payload of the event.
+    /**
+     * The serialized payload of the event.
+     */
     optional bytes      data                    = 9;
 
     // A collection of id of other events which have in some way
