@@ -1,6 +1,7 @@
 package rsb.protocol.introspection;
 
 import "rsb/protocol/operatingsystem/Process.proto";
+import "rsb/protocol/operatingsystem/Host.proto";
 
 option java_outer_classname = "HelloType";
 
@@ -54,18 +55,18 @@ message Hello {
      */
     repeated string                                transport = 5;
 
-    // Host Information
-
-    /**
-     * Name of the host on which the containing process executes.
-     */
-    required string                                hostname  = 6;
-
     // Process Information
 
     /**
      * Information about the process containing the participant.
      */
     required .rsb.protocol.operatingsystem.Process process   = 7;
+
+    // Host Information
+
+    /**
+     * Host on which the containing process executes.
+     */
+    required .rsb.protocol.operatingsystem.Host    host = 6;
 
 }

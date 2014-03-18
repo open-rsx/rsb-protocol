@@ -1,0 +1,22 @@
+package rsb.protocol.operatingsystem;
+
+option java_outer_classname = "HostType";
+
+/**
+ * Basic description of a host.
+ *
+ * @author Jan Moringen <jmoringe@techfak.uni-bielefeld.de>
+ */
+message Host {
+
+    /**
+     * Arbitrary string (hopefully) uniquely identifying the host.
+     */
+    required string id       = 1;
+
+    /**
+     * Human-readable name of the host.
+     */
+    required string hostname = 2;
+
+}

@@ -36,6 +36,7 @@ set(ALL_SOURCE_PROTOS "${PROTO_DIR}/rsb/protocol/Notification.proto"
 
                       "${PROTO_DIR}/rsb/protocol/operatingsystem/__package.proto"
                       "${PROTO_DIR}/rsb/protocol/operatingsystem/Process.proto"
+                      "${PROTO_DIR}/rsb/protocol/operatingsystem/Host.proto"
 
                       "${PROTO_DIR}/rsb/protocol/introspection/__package.proto"
                       "${PROTO_DIR}/rsb/protocol/introspection/Hello.proto"
