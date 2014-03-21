@@ -17,19 +17,32 @@ message Hello {
     // Participant Information
 
     /**
+     * Kind of the participant as lowercase string.
+     *
+     * Examples: "informer", "listener", "reader", etc.
+     */
+    required string                                kind      = 1;
+
+    /**
      * ID (a RFC 4122 UUID) of the participant as byte array.
      *
      * For this encoding, the encoded UUID is 16 bytes long.
      */
     // @constraint(len(value) = 16)
-    required bytes                                 id        = 1;
+    required bytes                                 id        = 2;
 
     /**
-     * Kind of the participant as lowercase string.
+     * If present, ID (a RFC 4122 UUID) of the composite participant
+     * containing the participant as a byte array.
      *
-     * Examples: "informer", "listener", "reader", etc.
+     * If not present, the participant is not contained in a composite
+     * participant (it may still be a composite participant and itself
+     * contain other participants, though)
+     *
+     * For this encoding, the encoded UUID is 16 bytes long.
      */
-    required string                                kind      = 2;
+    // @constraint(len(value) = 16)
+    optional bytes                                 parent    = 3;
 
     /**
      * Scope on which the participant listens, publishes or otherwise
@@ -37,7 +50,7 @@ message Hello {
      *
      * @todo proper representation
      */
-    required string                                scope     = 3;
+    required string                                scope     = 4;
 
     /**
      * Type of data produced or consumed by the participant.
@@ -47,14 +60,14 @@ message Hello {
      *
      * @todo Preliminary: will change to a proper representation
      */
-    optional string                                type      = 4;
+    optional string                                type      = 5;
 
     /**
      * A list of strings describing transports of the participant.
      *
      * @todo Preliminary: will change.
      */
-    repeated string                                transport = 5;
+    repeated string                                transport = 6;
 
     // Process Information
 
@@ -68,6 +81,6 @@ message Hello {
     /**
      * Host on which the containing process executes.
      */
-    required .rsb.protocol.operatingsystem.Host    host = 6;
+    required .rsb.protocol.operatingsystem.Host    host      = 8;
 
 }
