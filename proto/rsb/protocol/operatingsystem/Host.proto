@@ -11,6 +11,16 @@ message Host {
 
     /**
      * Arbitrary string (hopefully) uniquely identifying the host.
+     *
+     * The following sources should be used for determining this
+     * string (in order of preference for each platform):
+     *
+     * Linux
+     * * contents of /etc/machine-id (excluding whitespace characters)
+     * * contents of /var/lib/dbus/machine-id (excluding whitespace
+     *   characters)
+     * * Return value of POSIX gethostid function in hexadecimal base
+     * * Hostname
      */
     required string id       = 1;
 
