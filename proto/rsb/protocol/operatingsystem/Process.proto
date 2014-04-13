@@ -33,4 +33,12 @@ message Process {
      */
     repeated string commandline_arguments = 3;
 
+    /**
+     * Start time of the process encoded as a timestamp in UTC in
+     * microseconds since UNIX epoch.
+     *
+     * http://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html#timestamps
+     */
+    required uint64 start_time = 4;
+
 }
