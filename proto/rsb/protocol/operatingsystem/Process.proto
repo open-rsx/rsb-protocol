@@ -39,6 +39,15 @@ message Process {
      *
      * http://docs.cor-lab.org/rsb-manual/trunk/html/specification-event.html#timestamps
      */
-    required uint64 start_time = 4;
+    required uint64 start_time            = 4;
+
+    /**
+     * The version of the RSB implementation used in this process.
+     *
+     * The version string is of the form
+     *
+     *   MAJOR.MINOR.REVISION[-COMMIT]
+     */
+    optional string rsb_version           = 7;
 
 }
