@@ -19,10 +19,10 @@ message Host {
      * * contents of /etc/machine-id (excluding whitespace characters)
      * * contents of /var/lib/dbus/machine-id (excluding whitespace
      *   characters)
-     * * Return value of POSIX gethostid function in hexadecimal base
-     * * Hostname
+     * * As a last resort, the value may be omitted in which case the
+     *   hostname will be used as a means of identifying the host.
      */
-    required string id       = 1;
+    optional string id       = 1;
 
     /**
      * Human-readable name of the host.
