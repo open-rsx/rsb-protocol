@@ -22,11 +22,49 @@ message Host {
      * * As a last resort, the value may be omitted in which case the
      *   hostname will be used as a means of identifying the host.
      */
-    optional string id       = 1;
+    optional string id               = 1;
 
     /**
      * Human-readable name of the host.
      */
-    required string hostname = 2;
+    required string hostname         = 2;
+
+    /**
+     * Type of the machine, usually CPU architecture.
+     *
+     * For 32-bit and 64-bit CPUs in the x86 family, the values "x86"
+     * and "x86_64" should be used.
+     */
+    optional string machine_type     = 3;
+
+    /**
+     * Version of the machine within its type, usually CPU
+     * identification string.
+     *
+     * On Linux, the value of the "model name" field in the
+     * "/proc/cpuinfo" file can be used.
+     */
+    optional string machine_version  = 4;
+
+    /**
+     * Type of the operating system running on the machine, usually
+     * the kernel name.
+     *
+     * The value identifies the operating system running on the
+     * machine without indicating a specific version of that operating
+     * system.
+     *
+     * For Linux, MacOS and Windows the strings "linux", "darwin" and
+     * "win32" should be used respectively.
+     */
+    optional string software_type    = 5;
+
+    /**
+     * Version of the operating system within its type, usually the
+     * kernel version string.
+     *
+     * On Linux and MacOS, the output of the command "uname -r".
+     */
+    optional string software_version = 6;
 
 }
