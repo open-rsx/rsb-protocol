@@ -42,6 +42,14 @@ message Process {
     required uint64 start_time            = 4;
 
     /**
+     * Login- or account-name of the user executing the process.
+     *
+     * Can be omitted when not known, for example because of security
+     * policy constraints.
+     */
+    optional string executing_user        = 5;
+
+    /**
      * The version of the RSB implementation used in this process.
      *
      * The version string is of the form
