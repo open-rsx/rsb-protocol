@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 # Name and version
-project("RSBProtocol")
+project("RSBProtocol" NONE)
 string(TOLOWER "${CMAKE_PROJECT_NAME}" PROJECT_NAME_LOWERCASE)
 
 option(EXPORT_TO_CMAKE_PACKAGE_REGISTRY "If set to ON, ${CMAKE_PROJECT_NAME} will be exported to the CMake user package registry so that downstream projects automatically find the workspace location in find_package calls." OFF)
