@@ -32,6 +32,10 @@ message Host {
     /**
      * Type of the machine, usually CPU architecture.
      *
+     * The value is a lower-case string that identifies the processor
+     * family and potentially associated system architecture,
+     * generally without indicating a specific vendor or version.
+     *
      * For 32-bit and 64-bit CPUs in the x86 family, the values "x86"
      * and "x86_64" should be used.
      */
@@ -50,9 +54,9 @@ message Host {
      * Type of the operating system running on the machine, usually
      * the kernel name.
      *
-     * The value identifies the operating system running on the
-     * machine without indicating a specific version of that operating
-     * system.
+     * The value is a lower-case string that identifies the operating
+     * system running on the machine without indicating a specific
+     * version of that operating system.
      *
      * For Linux, MacOS and Windows the strings "linux", "darwin" and
      * "win32" should be used respectively.
