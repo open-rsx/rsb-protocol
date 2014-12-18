@@ -16,13 +16,33 @@ message Host {
      * string (in order of preference for each platform):
      *
      * Linux
-     * * contents of /etc/machine-id (excluding whitespace characters)
-     * * contents of /var/lib/dbus/machine-id (excluding whitespace
-     *   characters)
-     * * As a last resort, the value may be omitted in which case the
-     *   hostname will be used as a means of identifying the host.
+     *
+     *   * contents of /etc/machine-id (excluding whitespace characters)
+     *   * contents of /var/lib/dbus/machine-id (excluding whitespace
+     *     characters)
+     *   * As a last resort, the value may be omitted in which case
+     *     the hostname will be used as a means of identifying the
+     *     host.
+     *
+     * Windows
+     *
+     *   Since the appropriate C API function (GetComputerObjectName)
+     *   is difficult to use in some languages, the hostname should be
+     *   used instead.
+     *
+     * MacOS
+     *
+     *   Since the appropriate C API function (gethostuuid) is
+     *   difficult to use in some languages, the hostname should be
+     *   used instead.
+     *
+     * Other operating systems
+     *
+     *   A unique id provided by the operating should be used when it
+     *   can easily be used from all languages (i.e. readable from
+     *   file), otherwise the hostname should be used.
      */
-    optional string id               = 1;
+    required string id               = 1;
 
     /**
      * Human-readable name of the host.
