@@ -58,4 +58,9 @@ message Process {
      */
     optional string rsb_version           = 7;
 
+    /**
+     * A user-defined name for the process.
+     */
+    optional string display_name          = 8;
+
 }
