@@ -6,7 +6,7 @@ if(EXISTS "${CONFIG_DIR}/CMakeCache.txt")
 
 else()
 
-    foreach(F @ALL_REL_PROTOS@)
+    foreach(F @PROTOS@)
         set(PROTOFILES_WITH_ROOT ${PROTOFILES_WITH_ROOT} "${CONFIG_DIR}/${F}")
     endforeach()
 

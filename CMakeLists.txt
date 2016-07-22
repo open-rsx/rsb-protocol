@@ -20,43 +20,22 @@ find_package(RSC-CMake "${RSB_PROTOCOL_VERSION_MAJOR}.${RSB_PROTOCOL_VERSION_MIN
 list(APPEND CMAKE_MODULE_PATH ${RSC_CMAKE_MODULE_PATH})
 include(InstallFilesRecursive)
 
-math(EXPR WIRE_FORMAT_VERSION_FIELD_NUMBER
-     "100 + ${RSB_PROTOCOL_WIRE_FORMAT_VERSION}")
+set(PROTOS "rsb/protocol/Notification.proto"
+           "rsb/protocol/EventId.proto"
+           "rsb/protocol/EventMetaData.proto"
+           "rsb/protocol/FragmentedNotification.proto"
 
-# configre all files so that they are all in the build tree. This makes handling
-# protocol buffers easier because there is only one single root
+           "rsb/protocol/collections/EventsByScopeMap.proto"
 
-set(PROTO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/proto/")
-set(ALL_SOURCE_PROTOS "${PROTO_DIR}/rsb/protocol/Notification.proto"
-                      "${PROTO_DIR}/rsb/protocol/EventId.proto"
-                      "${PROTO_DIR}/rsb/protocol/EventMetaData.proto"
-                      "${PROTO_DIR}/rsb/protocol/FragmentedNotification.proto"
+           "rsb/protocol/operatingsystem/__package.proto"
+           "rsb/protocol/operatingsystem/Process.proto"
+           "rsb/protocol/operatingsystem/Host.proto"
 
-                      "${PROTO_DIR}/rsb/protocol/collections/EventsByScopeMap.proto"
+           "rsb/protocol/introspection/__package.proto"
+           "rsb/protocol/introspection/Hello.proto"
+           "rsb/protocol/introspection/Bye.proto")
 
-                      "${PROTO_DIR}/rsb/protocol/operatingsystem/__package.proto"
-                      "${PROTO_DIR}/rsb/protocol/operatingsystem/Process.proto"
-                      "${PROTO_DIR}/rsb/protocol/operatingsystem/Host.proto"
-
-                      "${PROTO_DIR}/rsb/protocol/introspection/__package.proto"
-                      "${PROTO_DIR}/rsb/protocol/introspection/Hello.proto"
-                      "${PROTO_DIR}/rsb/protocol/introspection/Bye.proto")
-
-set(ALL_BINARY_PROTOS)
-set(ALL_REL_PROTOS)
-foreach(PROTO ${ALL_SOURCE_PROTOS})
-
-    file(RELATIVE_PATH REL_PATH ${PROTO_DIR} ${PROTO})
-    set(BIN_PATH "${CMAKE_CURRENT_BINARY_DIR}/${REL_PATH}")
-    list(APPEND ALL_REL_PROTOS ${REL_PATH})
-    list(APPEND ALL_BINARY_PROTOS ${BIN_PATH})
-
-    configure_file(${PROTO} ${BIN_PATH} @ONLY)
-
-endforeach()
-
-install_files_recursive("share/${PROJECT_NAME_LOWERCASE}${VERSION_SUFFIX}"
-                        ALL_BINARY_PROTOS)
+add_subdirectory(proto)
 
 if(EXPORT_TO_CMAKE_PACKAGE_REGISTRY)
     message(STATUS "Exported ${CMAKE_PROJECT_NAME} to CMake package registry")

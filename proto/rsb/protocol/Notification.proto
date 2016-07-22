@@ -57,11 +57,9 @@ message Notification {
      * The unique ID of the event, consisting of the unique id of
      * sending participant and the sequence number of the event.
      *
-     * The field number of this required field is generated based on
-     * the current wire format version number to ensure runtime errors
-     * for incompatible wire format versions.
+     * The odd field number is a historical artifact.
      */
-    required EventId     event_id               = @WIRE_FORMAT_VERSION_FIELD_NUMBER@;
+    required EventId     event_id               = 108;
 
     /**
      * The scope to which the encoded event was sent.
