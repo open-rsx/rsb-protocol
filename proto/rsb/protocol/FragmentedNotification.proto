@@ -24,6 +24,8 @@
  *
  * ============================================================ */
 
+syntax = "proto2";
+
 package rsb.protocol;
 
 import "rsb/protocol/Notification.proto";

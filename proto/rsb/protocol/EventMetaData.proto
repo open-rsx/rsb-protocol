@@ -24,6 +24,8 @@
  *
  * ============================================================ */
 
+syntax = "proto2";
+
 package rsb.protocol;
 
 option java_outer_classname = "EventMetaDataType";
